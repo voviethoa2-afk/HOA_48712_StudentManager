@@ -1,0 +1,33 @@
+// =========================
+//     SEARCH STUDENT
+// =========================
+void searchStudent() {
+    int option;
+    cout << "\nSearch by: ";
+    cout << "\n1. ID";
+    cout << "\n2. Name";
+    cout << "\nChoose: ";
+    cin >> option;
+
+    cin.ignore();
+
+    if (option == 1) { // Search by ID
+        string id;
+        cout << "Enter ID: ";
+        getline(cin, id);
+
+        bool found = false;
+
+        for (auto &s : students) {
+            if (s.id == id) {
+                cout << "\nFound:\n";
+                cout << "ID: " << s.id
+                     << " | Name: " << s.name
+                     << " | Age: " << s.age << endl;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "No student found wit
