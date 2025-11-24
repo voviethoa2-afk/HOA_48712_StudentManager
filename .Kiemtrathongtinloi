@@ -1,0 +1,48 @@
+void addStudent() {
+    string id, name;
+    int age;
+
+    // ==== CHECK ID ====
+    while (true) {
+        cout << "Enter ID: ";
+        cin >> id;
+
+        if (id == "") {
+            cout << "❌ ID cannot be empty!\n";
+            continue;
+        }
+        if (isDuplicateID(id)) {
+            cout << "❌ ID already exists! Enter again.\n";
+            continue;
+        }
+        break;
+    }
+
+    // ==== CHECK NAME ====
+    cin.ignore();
+    while (true) {
+        cout << "Enter Name: ";
+        getline(cin, name);
+
+        if (name == "") {
+            cout << "❌ Name cannot be empty!\n";
+            continue;
+        }
+        break;
+    }
+
+    // ==== CHECK AGE ====
+    while (true) {
+        cout << "Enter Age: ";
+        cin >> age;
+
+        if (age <= 0 || age > 120) {
+            cout << "❌ Invalid age! Must be 1 – 120.\n";
+            continue;
+        }
+        break;
+    }
+
+    students.push_back(Student(id, name, age));
+    cout << "✔ Added successfully!\n";
+}
