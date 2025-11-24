@@ -1,0 +1,131 @@
+	#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class Student {
+public:
+    string id;
+    string name;
+    int age;
+
+    Student(string id, string name, int age) {
+        this->id = id;
+        this->name = name;
+        this->age = age;
+    }
+};
+
+// Danh sách sinh viên
+vector<Student> students;
+
+// =========================
+//      ADD STUDENT
+// =========================
+void addStudent() {
+    string id, name;
+    int age;
+
+    cout << "Enter ID: ";
+    cin >> id;
+
+    cout << "Enter Name: ";
+    cin.ignore();
+    getline(cin, name);
+
+    cout << "Enter Age: ";
+    cin >> age;
+
+    students.push_back(Student(id, name, age));
+    cout << "Added successfully!\n";
+}
+
+// =========================
+//    UPDATE STUDENT BY ID
+// =========================
+void updateStudent() {
+    string id;
+    cout << "Enter ID to update: ";
+    cin >> id;
+
+    bool found = false;
+
+    for (auto &s : students) {
+        if (s.id == id) {
+            found = true;
+            cout << "Enter new name: ";
+            cin.ignore();
+            getline(cin, s.name);
+
+            cout << "Enter new age: ";
+            cin >> s.age;
+
+            cout << "Updated successfully!\n";
+            break;
+        }
+    }
+
+    if (!found)
+        cout << "Student not found!\n";
+}
+
+// =========================
+//    DELETE STUDENT BY ID
+// =========================
+void deleteStudent() {
+    string id;
+    cout << "Enter ID to delete: ";
+    cin >> id;
+
+    for (int i = 0; i < students.size(); i++) {
+        if (students[i].id == id) {
+            students.erase(students.begin() + i);
+            cout << "Deleted successfully!\n";
+            return;
+        }
+    }
+
+    cout << "Student not found!\n";
+}
+
+// =========================
+//       SHOW LIST
+// =========================
+void showStudents() {
+    cout << "\n--- Student List ---\n";
+    for (auto &s : students) {
+        cout << "ID: " << s.id
+             << " | Name: " << s.name
+             << " | Age: " << s.age << endl;
+    }
+    cout << "---------------------\n";
+}
+
+// =========================
+//          MAIN
+// =========================
+int main() {
+    int choice;
+
+    do {
+        cout << "\n1. Add Student";
+        cout << "\n2. Update Student";
+        cout << "\n3. Delete Student";
+        cout << "\n4. Show Students";
+        cout << "\n0. Exit";
+        cout << "\nChoose: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addStudent(); break;
+            case 2: updateStudent(); break;
+            case 3: deleteStudent(); break;
+            case 4: showStudents(); break;
+            case 0: cout << "Bye!\n"; break;
+            default: cout << "Invalid choice!\n";
+        }
+
+    } while (choice != 0);
+
+    return 0;
+}
